@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uploaded images</title>
+</head>
+<body>
+    {% for file_url in file_urls %}
+    {% if file_url %}
+    <img src="{{file_url}}" alt="No Image Found" height="300" width="300">
+    {% endif %}
+    {% endfor %}
+   
+
+</body>
+</html>
