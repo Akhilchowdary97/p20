@@ -1,5 +1,5 @@
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE","p16.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE","p20.settings")
 
 import django
 django.setup()

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.core.files.storage import FileSystemStorage
 from myapp.utilities import store_Image
+from myapp import utilities
 def trail(request):
     return HttpResponse("<h1>Project is on Air</h1>")
 def base(request):
@@ -61,21 +62,12 @@ from myapp import forms
 def builtin(request):
     if request.method=="POST":
         form=forms.SampleForm(request.POST,request.FILES)
-        if form.is_valid():
-            First_Name=form.cleaned_data.get('First_Name')
-            Last_Name=form.cleaned_data.get('Last_Name')
-            Email=form.cleaned_data.get('Email')
-            PhoneNumber=form.cleaned_data.get('PhoneNumber')
-            Password=form.cleaned_data.get('Password')
-            birth_day=form.cleaned_data.get('birth_day')
-            birth_month=form.cleaned_data.get('birth_month')
-            birth_year=form.cleaned_data.get('birth_year')
-            Gender=form.cleaned_data.get('Gender')
-            Prog_Languages=form.cleaned_data.get('Prog_Languages')
-            Languages=form.cleaned_data.get('Languages')
-            Image=form.cleaned_data.get('Image')
-            store_Image(Image)
+        if form.is_valid()==False:
+            return render(request,"builtin.html",{'form':form})
+        else:
             data=form.cleaned_data
-            return render(request,"display_data.html",context=data)
+            Profile_Pic=data['Profile_Pic']
+            utilities.store_Image(Profile_Pic)
+            print(form.cleaned_data)
     form=forms.SampleForm()
     return render(request,"builtin.html",{'form':form})
